@@ -1,0 +1,39 @@
+{
+    "output": ".",
+    "builds": [
+        {
+            "name": "php",
+            "data": {
+                "from": "nginx:alpine",
+                "version": "php"
+            },
+            "files": [
+                {
+                    "name": "Dockerfile",
+                    "path": "template/Dockerfile"
+                },
+                {
+                    "name": "default.tmpl",
+                    "path": "template/default_tmpl"
+                }
+            ]
+        },
+        {
+            "name": "static",
+            "data": {
+                "from": "nginx:alpine",
+                "version": "static"
+            },
+            "files": [
+                {
+                    "name": "Dockerfile",
+                    "path": "template/Dockerfile"
+                },
+                {
+                    "name": "default.tmpl",
+                    "path": "template/default_tmpl"
+                }
+            ]
+        }
+    ]
+}
