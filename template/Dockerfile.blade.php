@@ -12,7 +12,8 @@ ENV LISTEN=80 \
     CLIENT_MAX_BODY_SIZE=25M
 
 @if ($version === 'php')
-ENV PHP_FPM=app:9000
+ENV PHP_FPM=app:9000 \
+    FASTCGI_READ_TIMEOUT=60s
 @endif
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl
