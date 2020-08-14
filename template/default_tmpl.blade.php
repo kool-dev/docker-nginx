@@ -21,6 +21,7 @@ server {
 @if ($version === 'php')
     location ~ \.php$ {
         fastcgi_pass @{{ .Env.PHP_FPM }};
+        fastcgi_read_timeout @{{ .Env.FASTCGI_READ_TIMEOUT }};
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
