@@ -1,6 +1,6 @@
 ![CI/CD](https://github.com/kool-dev/docker-nginx/workflows/CI/CD/badge.svg)
 
-# Description
+## Description
 
 Minimal [NGINX](https://www.nginx.com/) Docker image. It's use is intended for [kool.dev](https://github.com/kool-dev/kool), but can fit in any other NGINX use-case.
 
