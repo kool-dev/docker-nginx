@@ -1,38 +1,56 @@
-# kool-dev/docker-nginx
+![CI/CD](https://github.com/kool-dev/docker-nginx/workflows/CI/CD/badge.svg)
 
-<p align="center">
-<a href="https://github.com/kool-dev/docker-nginx/actions"><img src="https://github.com/kool-dev/docker-nginx/workflows/CI/badge.svg" alt="Github Actions Build Status"></a>
-</p>
+# Description
 
-Minimal Node Docker image focused on Laravel applications. Its use is intended for [fwd](https://github.com/kool-dev/fwd), but can fit in any other Node use-case.
+Minimal [NGINX](https://www.nginx.com/) Docker image. It's use is intended for [kool.dev](https://github.com/kool-dev/kool), but can fit in any other NGINX use-case.
+
+## Available Tags
+
+- [php](https://github.com/kool-dev/docker-nginx/blob/master/php/Dockerfile)
+- [static](https://github.com/kool-dev/docker-nginx/blob/master/static/Dockerfile)
+
+## Environment Variables
+
+Variable | Description | Default Value
+--- | --- | ---
+**LISTEN** | Changes the PORT address | `80`
+**ROOT** | Changes NGINX root directive | `/app/public`
+**CLIENT_MAX_BODY_SIZE** | Changes maximum allowed size of the client request body | `25M`
+**PHP_FPM** | Changes the address of a FastCGI server | `app:9000`
+**FASTCGI_READ_TIMEOUT** | Changes a timeout for reading a response from the FastCGI server | `60s`
 
 ## Usage
 
 With `docker run`:
 
 ```sh
-docker run -it --rm kooldev/node:alpine node -v
+docker run -it --rm kooldev/nginx:php nginx -v
 ```
 
-### Available Tags
+With environment variables:
 
-- **12**: Node 12
-- **12-qa**: Node 12 with QA Utilities: `buddy.js jshint jsinspect eslint`
-- **12-andois**: Node 12 with Adonis
-- **12-andois-qa**: Node 12 with Adonis and QA Utilities: `buddy.js jshint jsinspect eslint`
-- **14**: Node 14
-- **14-qa**: Node 14 with QA Utilities: `buddy.js jshint jsinspect eslint`
-- **14-andois**: Node 14 with Adonis
-- **14-andois-qa**: Node 14 with Adonis and QA Utilities: `buddy.js jshint jsinspect eslint`
-- **latest**: Node 14
-- **qa**: Node 14 with QA Utilities: `buddy.js jshint jsinspect eslint`
-- **andois**: Node 14 with Adonis
-- **andois-qa**: Node 14 with Adonis and QA Utilities: `buddy.js jshint jsinspect eslint`
+```sh
+docker run -it --rm -e LISTEN=8080 kooldev/nginx:php nginx -v
+```
 
+With `docker-compose.yml`:
 
-### Variables
+```yaml
+app:
+  image: kooldev/nginx:php
+  environment:
+    LISTEN: "8080"
+```
 
-**ASUSER**: Changes the user id that executes the commands
+## Contributing
+
+### Dependencies
+
+- [fwd](https://github.com/fireworkweb/fwd#fireworkwebfwd)
+
+You should change `fwd-template.json` and `template` folder.
+
+After your changes, just run `fwd template` to compile the template and generate all version folder/files.
 
 ## License
 
