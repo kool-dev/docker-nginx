@@ -11,13 +11,13 @@ Minimal [NGINX](https://www.nginx.com/) Docker image. It's use is intended for [
 
 ## Environment Variables
 
-Variable | Description | Default Value
+Variable | Default Value | Description
 --- | --- | ---
-**LISTEN** | Changes the PORT address | `80`
-**ROOT** | Changes NGINX root directive | `/app/public`
-**CLIENT_MAX_BODY_SIZE** | Changes maximum allowed size of the client request body | `25M`
-**PHP_FPM** | Changes the address of a FastCGI server | `app:9000`
-**FASTCGI_READ_TIMEOUT** | Changes a timeout for reading a response from the FastCGI server | `60s`
+**LISTEN** | `80` | Changes the PORT address
+**ROOT** | `/app/public` | Changes NGINX root directive
+**CLIENT_MAX_BODY_SIZE** | `25M` | Changes maximum allowed size of the client request body
+**PHP_FPM** | `app:9000` | Changes the address of a FastCGI server
+**FASTCGI_READ_TIMEOUT** | `60s` | Changes a timeout for reading a response from the FastCGI server
 
 ## Usage
 
