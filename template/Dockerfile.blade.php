@@ -7,7 +7,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 WORKDIR /app
 
-ENV LISTEN=80 \
+ENV INDEX={{ $index }} \
+    LISTEN=80 \
     ROOT=/app/public \
     CLIENT_MAX_BODY_SIZE=25M
 
