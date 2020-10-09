@@ -15,7 +15,7 @@ server {
 @endif
 
     location / {
-        try_files $uri $uri/ /@{{ .Env.INDEX }}{{ $version === 'php' ? 'index.php?$query_string' : '' }};
+        try_files $uri $uri/ /@{{ .Env.INDEX }}{{ $version === 'php' ? '?$query_string' : '' }};
 
         add_header X-Served-By kool.dev;
     }
