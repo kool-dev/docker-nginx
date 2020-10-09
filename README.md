@@ -15,10 +15,21 @@ Variable | Default Value | Description
 --- | --- | ---
 **LISTEN** | `80` | Changes the PORT address
 **ROOT** | `/app/public` | Changes NGINX root directive
-**INDEX** | `index.php` | Changes the index directive
 **CLIENT_MAX_BODY_SIZE** | `25M` | Changes maximum allowed size of the client request body
 **PHP_FPM** | `app:9000` | Changes the address of a FastCGI server
 **FASTCGI_READ_TIMEOUT** | `60s` | Changes a timeout for reading a response from the FastCGI server
+**FASTCGI_BUFFERS** | `8 8k` | Changes the number and size of the buffers used for reading a response
+**FASTCGI_BUFFER_SIZE** | `16k` | Changes the size of the buffer used for reading the first part of the response received
+
+### php
+Variable | Default Value | Description
+--- | --- | ---
+**INDEX** | `index.php` | Changes the index directive
+
+### static
+Variable | Default Value | Description
+--- | --- | ---
+**INDEX** | `index.html` | Changes the index directive
 
 ## Usage
 
