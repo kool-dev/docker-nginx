@@ -2,7 +2,7 @@ server {
     listen {{ .Env.LISTEN }} default_server;
     server_name _;
     root {{ .Env.ROOT }};
-    index index.html;
+    index {{ .Env.INDEX }};
     charset utf-8;
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -10,10 +10,10 @@ server {
 
     client_max_body_size {{ .Env.CLIENT_MAX_BODY_SIZE }};
 
-    error_page 404 /index.html;
+    error_page 404 /{{ .Env.INDEX }};
 
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ /{{ .Env.INDEX }};
 
         add_header X-Served-By kool.dev;
     }
