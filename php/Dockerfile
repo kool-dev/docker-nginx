@@ -7,12 +7,15 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 WORKDIR /app
 
-ENV LISTEN=80 \
+ENV INDEX=index.php \
+    LISTEN=80 \
     ROOT=/app/public \
     CLIENT_MAX_BODY_SIZE=25M
 
 ENV PHP_FPM=app:9000 \
-    FASTCGI_READ_TIMEOUT=60s
+    FASTCGI_READ_TIMEOUT=60s \
+    FASTCGI_BUFFERS='8 8k' \
+    FASTCGI_BUFFER_SIZE='16k'
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl
 
