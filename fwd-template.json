@@ -20,11 +20,10 @@
             ]
         },
         {
-            "name": "static",
+            "name": "proxy",
             "data": {
                 "from": "nginx:alpine",
-                "version": "static",
-                "index": "index.html"
+                "version": "proxy"
             },
             "files": [
                 {
@@ -38,10 +37,10 @@
             ]
         },
         {
-            "name": "proxy",
+            "name": "static",
             "data": {
                 "from": "nginx:alpine",
-                "version": "proxy",
+                "version": "static",
                 "index": "index.html"
             },
             "files": [
