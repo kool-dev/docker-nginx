@@ -7,10 +7,12 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 WORKDIR /app
 
+ENV LISTEN=80 \
+    CLIENT_MAX_BODY_SIZE=25M \
+    DOMAIN=_
+
 ENV INDEX=index.html \
-    LISTEN=80 \
-    ROOT=/app/public \
-    CLIENT_MAX_BODY_SIZE=25M
+    ROOT=/app
 
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl

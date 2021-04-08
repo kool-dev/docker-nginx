@@ -36,6 +36,24 @@
                     "path": "template/default_tmpl"
                 }
             ]
+        },
+        {
+            "name": "proxy",
+            "data": {
+                "from": "nginx:alpine",
+                "version": "proxy",
+                "index": "index.html"
+            },
+            "files": [
+                {
+                    "name": "Dockerfile",
+                    "path": "template/Dockerfile"
+                },
+                {
+                    "name": "default.tmpl",
+                    "path": "template/default_tmpl"
+                }
+            ]
         }
     ]
 }

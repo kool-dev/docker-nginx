@@ -1,6 +1,6 @@
 server {
     listen {{ .Env.LISTEN }} default_server;
-    server_name _;
+    server_name {{ .Env.DOMAIN }};
     root {{ .Env.ROOT }};
     index {{ .Env.INDEX }};
     charset utf-8;

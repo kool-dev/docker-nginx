@@ -7,10 +7,12 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 WORKDIR /app
 
+ENV LISTEN=80 \
+    CLIENT_MAX_BODY_SIZE=25M \
+    DOMAIN=_
+
 ENV INDEX=index.php \
-    LISTEN=80 \
-    ROOT=/app/public \
-    CLIENT_MAX_BODY_SIZE=25M
+    ROOT=/app/public
 
 ENV PHP_FPM=app:9000 \
     FASTCGI_READ_TIMEOUT=60s \

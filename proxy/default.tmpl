@@ -1,8 +1,6 @@
 server {
     listen {{ .Env.LISTEN }} default_server;
-    server_name {{ .Env.DOMAIN }};
-    root {{ .Env.ROOT }};
-    index {{ .Env.INDEX }};
+    server_name  ~^(?<subdomain>.+)\.{{ .Env.DOMAIN }}$;
     charset utf-8;
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -10,12 +8,11 @@ server {
 
     client_max_body_size {{ .Env.CLIENT_MAX_BODY_SIZE }};
 
-    error_page 404 /{{ .Env.INDEX }};
 
     location / {
-        try_files $uri $uri/ /{{ .Env.INDEX }};
+        resolver 127.0.0.11;
 
-        add_header X-Served-By kool.dev;
+        proxy_pass http://$subdomain;
     }
 
 
