@@ -29,6 +29,15 @@ server {
         try_files $uri $uri/ /@{{ .Env.INDEX }}{{ $version === 'php' ? '?$query_string' : '' }};
 
         add_header X-Served-By kool.dev;
+
+@if ($version === 'static')
+        # optimizations from https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/
+        sendfile on;
+        sendfile_max_chunk 2m;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 150;
+@endif
     }
 @endif
 
