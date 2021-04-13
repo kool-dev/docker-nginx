@@ -17,6 +17,10 @@ RUN mkdir /etc/nginx/h5bp \
     && mv server-configs-nginx-*/mime.types /etc/nginx/mime.types \
     && rm -rf server-configs-nginx-*
 
+# handle output
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log \
+
 WORKDIR /app
 
 ENV LISTEN=80 \
