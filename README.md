@@ -2,7 +2,7 @@
 
 ## Description
 
-Minimal [NGINX](https://www.nginx.com/) Docker image. It's use is intended for [kool.dev](https://github.com/kool-dev/kool), but can fit in any other NGINX use-case.
+Minimal [NGINX](https://www.nginx.com/) Docker images. It's use is intended for [kool.dev](https://github.com/kool-dev/kool), but can fit in any other NGINX use-case.
 
 ## Available Tags
 
@@ -58,11 +58,9 @@ app:
 
 ### Dependencies
 
-- [fwd](https://github.com/fireworkweb/fwd#fireworkwebfwd)
-
 You should change `fwd-template.json` and `template` folder.
 
-After your changes, just run `fwd template` to compile the template and generate all version folder/files.
+After any changes, we just need to run `kool run template` (you need [kool](https://github.com/kool-dev/kool)) to compile the template and generate all version folder/files.
 
 ## License
 

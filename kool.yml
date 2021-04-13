@@ -1,0 +1,7 @@
+scripts:
+  template: kool docker fireworkweb/fwd:v1.0 fwd template
+  build:
+    - kool run template
+    - docker build --no-cache --pull -t kooldev/nginx:php php
+    - docker build --no-cache --pull -t kooldev/nginx:static static
+    - docker build --no-cache --pull -t kooldev/nginx:proxy proxy
