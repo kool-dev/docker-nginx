@@ -13,7 +13,7 @@ ENV LISTEN=80 \
 
 @if ($version !== 'proxy')
 ENV INDEX={{ $index }} \
-    ROOT=/app{{ $version === 'php' ? '/public' : '' }}
+    ROOT=/app/public
 @endif
 
 @if ($version === 'php')
