@@ -1,8 +1,12 @@
 server {
     listen @{{ .Env.LISTEN }} default_server;
-    server_name _;
+@if ($version === 'proxy')
+    server_name  ~^(?<subdomain>.+)\.@{{ .Env.DOMAIN }}$;
+@else
+    server_name @{{ .Env.DOMAIN }};
     root @{{ .Env.ROOT }};
     index @{{ .Env.INDEX }};
+@endif
     charset utf-8;
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -14,11 +18,19 @@ server {
     error_page 404 /@{{ .Env.INDEX }};
 @endif
 
+@if ($version === 'proxy')
+    location / {
+        resolver 127.0.0.11;
+
+        proxy_pass http://$subdomain;
+    }
+@else
     location / {
         try_files $uri $uri/ /@{{ .Env.INDEX }}{{ $version === 'php' ? '?$query_string' : '' }};
 
         add_header X-Served-By kool.dev;
     }
+@endif
 
 @if ($version === 'php')
     location ~ \.php$ {

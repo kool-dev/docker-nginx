@@ -9,19 +9,9 @@ WORKDIR /app
 
 ENV LISTEN=80 \
     CLIENT_MAX_BODY_SIZE=25M \
-    DOMAIN={{ $version === 'proxy' ? 'localhost' : '_' }}
+    DOMAIN=localhost
 
-@if ($version !== 'proxy')
-ENV INDEX={{ $index }} \
-    ROOT=/app{{ $version === 'php' ? '/public' : '' }}
-@endif
 
-@if ($version === 'php')
-ENV PHP_FPM=app:9000 \
-    FASTCGI_READ_TIMEOUT=60s \
-    FASTCGI_BUFFERS='8 8k' \
-    FASTCGI_BUFFER_SIZE='16k'
-@endif
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl
 

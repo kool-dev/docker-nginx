@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [php, static]
+        version: [php, proxy, static]
 
     steps:
       - name: Checkout code

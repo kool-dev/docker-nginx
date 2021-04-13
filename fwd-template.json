@@ -20,6 +20,23 @@
             ]
         },
         {
+            "name": "proxy",
+            "data": {
+                "from": "nginx:alpine",
+                "version": "proxy"
+            },
+            "files": [
+                {
+                    "name": "Dockerfile",
+                    "path": "template/Dockerfile"
+                },
+                {
+                    "name": "default.tmpl",
+                    "path": "template/default_tmpl"
+                }
+            ]
+        },
+        {
             "name": "static",
             "data": {
                 "from": "nginx:alpine",
