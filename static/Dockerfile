@@ -17,10 +17,6 @@ RUN mkdir /etc/nginx/h5bp \
     && mv server-configs-nginx-*/mime.types /etc/nginx/mime.types \
     && rm -rf server-configs-nginx-*
 
-# handle output
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
-
 WORKDIR /app
 
 ENV LISTEN=80 \
@@ -32,7 +28,11 @@ ENV INDEX=index.html \
 
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl
+COPY entrypoint.sh /kool/entrypoint.sh
+
+RUN chmod +x /kool/entrypoint.sh
 
 EXPOSE 80
 
-CMD ["dockerize", "-template", "/etc/nginx/conf.d/default.tmpl:/etc/nginx/conf.d/default.conf", "nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "/kool/entrypoint.sh" ]
+CMD ["nginx", "-g", "daemon off;"]
