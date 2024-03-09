@@ -15,7 +15,6 @@ server {
         try_files $uri $uri/ /{{ .Env.INDEX }}?$query_string;
 
         add_header X-Served-By kool.dev;
-
     }
 
     location ~ \.php$ {
