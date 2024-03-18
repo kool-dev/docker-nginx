@@ -36,7 +36,11 @@ ENV PHP_FPM=app:9000 \
 @endif
 
 COPY default.tmpl /etc/nginx/conf.d/default.tmpl
+COPY entrypoint.sh /kool/entrypoint.sh
+
+RUN chmod +x /kool/entrypoint.sh
 
 EXPOSE 80
 
-CMD ["dockerize", "-template", "/etc/nginx/conf.d/default.tmpl:/etc/nginx/conf.d/default.conf", "nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "/kool/entrypoint.sh" ]
+CMD ["nginx", "-g", "daemon off;"]
