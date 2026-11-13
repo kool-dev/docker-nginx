@@ -56,6 +56,31 @@ app:
 
 ## Contributing
 
+### Image checks
+
+CI builds all three variants for **linux/amd64**. ARM is not supported by the
+bundled dockerize binary. Weekly Monday rebuilds pull the latest `nginx:alpine`
+and refresh Alpine packages without reusing build layers.
+
+Run the same configuration and HTTP checks locally after building an image:
+
+```sh
+docker build --pull --no-cache -t nginx-test:php php
+bash tests/smoke.sh php nginx-test:php
+```
+
+Repeat for `static` and `proxy`. Tests require Docker and curl, publish only a
+random loopback port, and remove their containers/network afterward. PHP uses a
+real PHP-FPM fixture; proxy uses a Docker DNS upstream. Tests check default and
+overridden config, invalid config rejection, static assets, routing/query
+handling, denied `.ht` files and request body limits.
+
+Before publication, Grype blocks high/critical findings (including unfixed ones).
+Full JSON reports, including lower severities, are retained as workflow artifacts.
+There are no vulnerability exclusions. Scan failures require investigation and
+an image/package fix, not disabling the gate. A successful scan is not proof
+that an image is vulnerability-free.
+
 ### Dependencies
 
 You should change `fwd-template.json` and `template` folder.
