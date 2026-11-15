@@ -62,6 +62,16 @@ CI builds all three variants for **linux/amd64**. ARM is not supported by the
 bundled dockerize binary. Weekly Monday rebuilds pull the latest `nginx:alpine`
 and refresh Alpine packages without reusing build layers.
 
+CI shares Bash/`jq` native-build, staging and publication tooling from
+[kool-dev/kool](https://github.com/kool-dev/kool/tree/main/.github/actions),
+pinned to one immutable commit. Builds, HTTP tests and Grype scans stay here.
+After all three native jobs pass, one publisher validates current-run/attempt
+metadata and promotes only the tested/scanned digests. Stable tags use indexes
+containing only amd64 (no ARM support added). PRs, forks and feature branches cannot log in or
+publish; release runs serialize and are not canceled. Rerun **all jobs** after a
+failed release. There is no resume workflow or cross-attempt reuse, and updates
+across the three tags are not atomic.
+
 Run the same configuration and HTTP checks locally after building an image:
 
 ```sh
