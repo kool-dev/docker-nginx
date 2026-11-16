@@ -35,7 +35,7 @@ jobs:
           - {arch: amd64, runner: ubuntu-24.04}
     steps:
       - uses: actions/checkout@v7
-      - uses: kool-dev/kool/.github/actions/image-build@e06584d9fc7de69f4e3a9811d64a9f691f592b6b
+      - uses: kool-dev/action/image-build@c1a0de73a81d63b9b1da74001afd60aa5573470a
         with:
           arch: ${{ matrix.platform.arch }}
       - name: Build fresh image
@@ -70,7 +70,7 @@ jobs:
           name: grype-${{ matrix.version }}
           path: grype-${{ matrix.version }}.json
           if-no-files-found: warn
-      - uses: kool-dev/kool/.github/actions/image-stage@e06584d9fc7de69f4e3a9811d64a9f691f592b6b
+      - uses: kool-dev/action/image-stage@c1a0de73a81d63b9b1da74001afd60aa5573470a
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.repository == 'kool-dev/docker-nginx'
         with:
           canonical-repository: kool-dev/docker-nginx
@@ -84,14 +84,14 @@ jobs:
   publish:
     needs: [checks, build]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.repository == 'kool-dev/docker-nginx'
-    uses: kool-dev/kool/.github/workflows/image-publish.yml@e06584d9fc7de69f4e3a9811d64a9f691f592b6b
+    uses: kool-dev/action/.github/workflows/image-publish.yml@c1a0de73a81d63b9b1da74001afd60aa5573470a
     with:
       canonical-repository: kool-dev/docker-nginx
       default-branch: master
       repository: kooldev/nginx
       tags: ${{ needs.checks.outputs.tags }}
       architectures: '["amd64"]'
-      tooling-ref: e06584d9fc7de69f4e3a9811d64a9f691f592b6b
+      tooling-ref: c1a0de73a81d63b9b1da74001afd60aa5573470a
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
