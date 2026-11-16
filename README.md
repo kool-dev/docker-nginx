@@ -62,6 +62,11 @@ CI builds all three variants for **linux/amd64**. ARM is not supported by the
 bundled dockerize binary. Weekly Monday rebuilds pull the latest `nginx:alpine`
 and refresh Alpine packages without reusing build layers.
 
+CI uses [shared Bash/`jq` actions](https://github.com/kool-dev/action/blob/master/image-ci.md),
+pinned in the workflow. Builds, HTTP tests and Grype scans stay here. After all
+three jobs pass, one publisher promotes the tested/scanned digests as amd64-only
+indexes. See the shared release rules for publication guards and retry behavior.
+
 Run the same configuration and HTTP checks locally after building an image:
 
 ```sh
